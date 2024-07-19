@@ -73,6 +73,7 @@ fn play_game(rounds: usize) -> String {
 
     html_output.push_str("<p>I intentionally forgive the first Random Strategy move to make the game sometimes imbalanced. \n");
     html_output.push_str("This is a demo for the lightning talk on Game Theory with a sprinkle of Rust and serverless.</p> \n");
+    html_output.push_str("The source code for this demo is available on <a href=\"https://github.com/bind-almir/lambda-69\">GitHub</a>.</p>\n");
     html_output.push_str(
         "<table>\n<tr><th>Round</th><th>Random Strategy</th><th>Tit-for-Tat Strategy</th></tr>\n",
     );

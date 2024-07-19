@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  lambda-69
+
+  The Game Theory tit-for-tat vs random strategy
+Globals:
+  Function:
+    Timeout: 3
+    MemorySize: 128
+
+Resources:
+  TheGameFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: rust-cargolambda
+    Properties:
+      CodeUri: ./rust_app 
+      Handler: bootstrap 
+      Runtime: provided.al2023
+      Architectures:
+        - arm64
+      Events:
+        TheGame:
+          Type: Api
+          Properties:
+            Path: /play
+            Method: get
+
+Outputs:
+  TheGameApi:
+    Description: "API Gateway endpoint URL for Prod stage for The Game function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/play/"
+  TheGameFunction:
+    Description: "The Game Lambda Function ARN"
+    Value: !GetAtt TheGameFunction.Arn
+  TheGameFunctionIamRole:
+    Description: "Implicit IAM Role created for The Game function"
+    Value: !GetAtt TheGameFunctionRole.Arn
